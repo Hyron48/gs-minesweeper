@@ -18,7 +18,7 @@ public class GameSetup {
     // Default Builder
 
     public static GameSetup getEasyMode() {
-        return new GameSetup(Difficulty.EASY, 8, 8, 8);
+        return new GameSetup(Difficulty.EASY, 8, 8, 90);
     }
 
     public static GameSetup getNormalMode() {

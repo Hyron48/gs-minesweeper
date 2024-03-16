@@ -1,6 +1,6 @@
 package it.unimol.minesweeper.app;
 
-import it.unimol.minesweeper.app.helper.Tools;
+import littlelib.Tools;
 
 import java.util.Random;
 import java.util.Scanner;
