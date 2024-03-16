@@ -3,9 +3,9 @@ package it.unimol.minesweeper.gui;
 import it.unimol.minesweeper.app.Board;
 import it.unimol.minesweeper.app.Difficulty;
 import it.unimol.minesweeper.app.GameSetup;
-import it.unimol.minesweeper.app.helper.HighScoreList;
-import it.unimol.minesweeper.app.helper.StopWatch;
-import it.unimol.minesweeper.app.helper.Tools;
+import littlelib.StopWatch;
+import littlelib.Tools;
+import littlelib.score.HighScoreList;
 
 import java.io.*;
 import java.util.ArrayList;
