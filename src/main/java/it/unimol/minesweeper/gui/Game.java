@@ -31,18 +31,18 @@ public class Game {
         }
     }
 
-    public void mainLoop() {
+    public void mainLoop(Scanner scanner) {
         while (true) {
             System.out.println("[1] New game");
             System.out.println("[2] High score");
             System.out.println("[3] Exit");
 
-            System.out.print("Input: ");
+            System.out.println("Input: ");
             String input = scanner.nextLine();
             System.out.println();
 
             if (input.equals("1")) {
-                this.chooseDifficultyAndPlay();
+                this.chooseDifficultyAndPlay(scanner);
             } else if (input.equals("2")) {
                 this.showHighScore();
             } else if (input.equals("3")) {
@@ -53,8 +53,7 @@ public class Game {
         }
     }
 
-    //Private Methods
-    private void chooseDifficultyAndPlay() {
+    public void chooseDifficultyAndPlay(Scanner scanner) {
         System.out.println("Select map size:");
         System.out.println("[1] Small map");
         System.out.println("[2] Normal map");
@@ -68,6 +67,7 @@ public class Game {
         this.manageDifficultyChoise(input);
     }
 
+    //Private Methods
     private void load() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_PATH))) {
             List<HighScoreList> scoreLists = (List<HighScoreList>) ois.readObject();
@@ -92,6 +92,7 @@ public class Game {
             int minedPossibility = Tools.saveIntInput("Mined Possibility: ", Board.minimumMined, Integer.MAX_VALUE);
             this.play(GameSetup.getCustomMode(height, width, minedPossibility));
         } else if (input.equals("5")) {
+            System.out.printf("ok");
             return;
         }
     }

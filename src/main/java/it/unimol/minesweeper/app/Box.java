@@ -37,6 +37,10 @@ public class Box {
         return mined;
     }
 
+    public boolean isMarked() {
+        return marked;
+    }
+
     public boolean isExplored() {
         if (this.isMined()) {
             this.appearance = null;
@@ -45,15 +49,16 @@ public class Box {
     }
 
     public String getAppearance() {
-
         if (this.appearance != null) {
             return appearance;
         }
 
         if (this.explored) {
             return this.mined ? "X" : " ";
+        } else if (this.marked) {
+            return "#";
         }
 
-        return this.marked ? "#" : "-";
+        return "-";
     }
 }

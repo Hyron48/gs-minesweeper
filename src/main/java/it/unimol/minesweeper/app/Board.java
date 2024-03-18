@@ -68,6 +68,10 @@ public class Board {
         System.out.println("Y: Column number\b");
     }
 
+    public Box[][] getFields() {
+        return fields;
+    }
+
     // User Action
     public void mark(int x, int y) {
         this.fields[x][y].mark();
@@ -127,28 +131,23 @@ public class Board {
             return;
         }
 
-        int x;
-        int y;
-
-        switch (choice.toLowerCase()) {
-            case "e" :
-                x = Tools.saveIntInput("x: ", 0, this.width - 1);
-                y = Tools.saveIntInput("y: ", 0, this.height - 1);
-                exploreBox(x, y);
-                break;
-            case "m":
-                x = Tools.saveIntInput("x: ", 0, this.width - 1);
-                y = Tools.saveIntInput("y: ", 0, this.height - 1);
-                mark(x, y);
-                break;
-            case "u":
-                x = Tools.saveIntInput("x: ", 0, this.width - 1);
-                y = Tools.saveIntInput("y: ", 0, this.height - 1);
-                unmark(x, y);
-                break;
-            default:
-                System.out.println("Invalid input. Enter x for exit.\n");
-                break;
+        if (Tools.equalsOneOf(true, choice, "e", "m", "u")) {
+            int x= this.saveIntWithRange(scanner, "x: ", 0, this.width - 1);
+            int y = this.saveIntWithRange(scanner, "y: ", 0, this.height - 1);
+            switch (choice.toLowerCase()) {
+                case "e" :
+                    exploreBox(x, y);
+                    break;
+                case "m":
+                    mark(x, y);
+                    break;
+                case "u":
+                    unmark(x, y);
+                    break;
+                default:
+                    System.out.println("Invalid input. Enter x for exit.\n");
+                    break;
+                }
         }
     }
 
@@ -219,6 +218,28 @@ public class Board {
         }
 
         return validCoords;
+    }
+
+    private int saveIntWithRange(Scanner scanner, String label, int minValue, int maxValue) {
+        while(true) {
+            int input = this.saveInt(label, scanner);
+            if (input <= maxValue && input >= minValue) {
+                return input;
+            } else {
+                System.out.println("The input has to be between " + minValue + " and " + maxValue + ".");
+            }
+        }
+    }
+
+    private int saveInt(String label, Scanner scanner) {
+        while (true) {
+            try {
+                System.out.print(label);
+                return Integer.valueOf(scanner.nextLine());
+            } catch (NumberFormatException var2) {
+                System.out.println("Not a valid number.");
+            }
+        }
     }
 }
 
