@@ -209,8 +209,8 @@ public class Board {
         int[] indices = new int[8];
         int indicesIndex = 0;
         for (int i = 0; i < 8; i++) {
-            if ((nearbyBoxes[i][0] > -1 && nearbyBoxes[i][0] < this.height)
-                    && (nearbyBoxes[i][1] > -1 && nearbyBoxes[i][1] < this.width)) {
+            if (nearbyBoxes[i][0] > -1 && nearbyBoxes[i][0] < this.height
+                    && nearbyBoxes[i][1] > -1 && nearbyBoxes[i][1] < this.width) {
                 numberOfValidCoords++;
                 indices[indicesIndex] = i;
                 indicesIndex++;
