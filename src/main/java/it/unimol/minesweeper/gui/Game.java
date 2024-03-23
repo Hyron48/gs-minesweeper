@@ -20,15 +20,31 @@ public class Game {
     private HighScoreList normalHighScoreList;
     private HighScoreList hardHighScoreList;
 
+    public HighScoreList getEasyHighScoreList() {
+        return easyHighScoreList;
+    }
+
+    public HighScoreList getNormalHighScoreList() {
+        return normalHighScoreList;
+    }
+
+    public HighScoreList getHardHighScoreList() {
+        return hardHighScoreList;
+    }
+
     public Game() {
         File save = new File(SAVE_PATH);
         if (save.exists()) {
             load();
         } else {
-            easyHighScoreList = new HighScoreList("Easy Mode", 5, "seconds", true);
-            normalHighScoreList = new HighScoreList("Normal Mode", 5, "seconds", true);
-            hardHighScoreList = new HighScoreList("Hard Mode", 5, "seconds", true);
+            this.setManuallyHighScore();
         }
+    }
+
+    public void setManuallyHighScore() {
+        easyHighScoreList = new HighScoreList("Easy Mode", 5, "seconds", true);
+        normalHighScoreList = new HighScoreList("Normal Mode", 5, "seconds", true);
+        hardHighScoreList = new HighScoreList("Hard Mode", 5, "seconds", true);
     }
 
     public void mainLoop(Scanner scanner) {
@@ -64,7 +80,7 @@ public class Game {
         String input = scanner.nextLine();
         System.out.println();
 
-        this.manageDifficultyChoise(input);
+        this.manageDifficultyChoise(input, scanner);
     }
 
     //Private Methods
@@ -79,18 +95,18 @@ public class Game {
         }
     }
 
-    private void manageDifficultyChoise(String input) {
+    private void manageDifficultyChoise(String input, Scanner scanner) {
         if (input.equals("1")) {
-            this.play(GameSetup.getEasyMode());
+            this.play(GameSetup.getEasyMode(), scanner);
         } else if (input.equals("2")) {
-            this.play(GameSetup.getNormalMode());
+            this.play(GameSetup.getNormalMode(), scanner);
         } else if (input.equals("3")) {
-            this.play(GameSetup.getHardMode());
+            this.play(GameSetup.getHardMode(), scanner);
         } else if (input.equals("4")) {
             int width = Tools.saveIntInput("Width: ", Board.min, Board.max);
             int height = Tools.saveIntInput("Height: ", Board.min, Board.max);
             int minedPossibility = Tools.saveIntInput("Mined Possibility: ", Board.minimumMined, Integer.MAX_VALUE);
-            this.play(GameSetup.getCustomMode(height, width, minedPossibility));
+            this.play(GameSetup.getCustomMode(height, width, minedPossibility), scanner);
         } else if (input.equals("5")) {
             System.out.printf("ok");
             return;
@@ -103,8 +119,7 @@ public class Game {
         System.out.println(hardHighScoreList);
     }
 
-    private void play(GameSetup mode) {
-        Scanner scanner = new Scanner(System.in);
+    private void play(GameSetup mode, Scanner scanner) {
         Board board = new Board(mode.getWidth(), mode.getHeight(), mode.getMinedPossibility());
 
         StopWatch watch = new StopWatch();
@@ -113,7 +128,10 @@ public class Game {
         board.displayAxisInfo();
         while (!board.isMapCompleted() && !board.isDestroyed() && !board.isGivenUp()) {
             board.display();
-            board.getUserInput(scanner);
+            boolean closeLoop = false;
+            while (!closeLoop) {
+                closeLoop = board.getUserInput(scanner);
+            }
         }
 
         watch.stop();
