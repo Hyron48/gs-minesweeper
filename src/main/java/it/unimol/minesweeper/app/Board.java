@@ -31,7 +31,7 @@ public class Board {
             height = min;
             System.out.println("The minimum height is " + min + ".");
         }
-        if (width > max) {
+        if (height > max) {
             height = max;
             System.out.println("The maximum height is " + max + ".");
         }
@@ -51,6 +51,17 @@ public class Board {
     }
 
     // Getter
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+
+
     public boolean isDestroyed() {
         return this.destroyed;
     }
@@ -65,7 +76,7 @@ public class Board {
 
     public void displayAxisInfo() {
         System.out.println("X: Line number\n");
-        System.out.println("Y: Column number\b");
+        System.out.println("Y: Column number\n");
     }
 
     public Box[][] getFields() {
