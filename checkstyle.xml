@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <!-- Check for tab stops -->
+    <module name="RegexpSingleline">
+        <property name="format" value="\t"/>
+        <property name="message" value="Tab characters are not allowed"/>
+    </module>
+
+    <module name="TreeWalker">
+        <!-- Indentation checks -->
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+            <property name="braceAdjustment" value="0"/>
+            <property name="caseIndent" value="4"/>
+            <property name="throwsIndent" value="4"/>
+            <property name="lineWrappingIndentation" value="4"/>
+            <property name="arrayInitIndent" value="4"/>
+        </module>
+
+        <!-- Controls the maximum length of lines of code -->
+        <module name="LineLength">
+            <property name="max" value="120"/>
+            <property name="ignorePattern" value="^package.*|^import.*"/>
+        </module>
+
+        <!-- Controls the use of static variable names -->
+        <module name="StaticVariableName"/>
+
+        <!-- Controls the use of method parameter names -->
+        <module name="ParameterName">
+            <property name="tokens" value="PARAMETER_DEF"/>
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+
+        <!-- Check for empty capture blocks -->
+        <module name="EmptyCatchBlock"/>
+
+        <!-- Controls the use of unused variables -->
+        <module name="UnusedImports"/>
+    </module>
+</module>

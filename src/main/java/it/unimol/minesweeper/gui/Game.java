@@ -7,7 +7,12 @@ import littlelib.StopWatch;
 import littlelib.Tools;
 import littlelib.score.HighScoreList;
 
-import java.io.*;
+import java.io.File;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
