@@ -5,21 +5,33 @@
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
          xsi:noNamespaceSchemaLocation="http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
 
+<!--    REFERRAL LINK-->
+<!--    https://pmd.github.io/pmd/pmd_rules_java.html-->
+
+    <!-- BEST PRACTICE-->
+    <!-- AbstractClassWithoutAbstractMethod -->
+    <rule ref="category/java/bestpractices.xml/AbstractClassWithoutAbstractMethod"/>
     <!-- UnusedLocalVariable -->
-    <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod">
-        <priority>3</priority>
-    </rule>
+    <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod"/>
+    <!-- AccessorClassGeneration -->
+    <rule ref="category/java/bestpractices.xml/AccessorClassGeneration"/>
 
+    <!-- CODE STYLE-->
     <!-- UnnecessaryReturn -->
-    <rule ref="category/java/codestyle.xml/UnnecessaryReturn">
-        <priority>3</priority>
-    </rule>
-
+    <rule ref="category/java/codestyle.xml/UnnecessaryReturn"/>
     <!-- UselessParentheses -->
-    <rule ref="category/java/codestyle.xml/UselessParentheses">
-        <priority>3</priority>
-    </rule>
+    <rule ref="category/java/codestyle.xml/UselessParentheses"/>
 
-    <!-- Add more rules here -->
+    <!-- PERFORMANCE-->
+    <!-- AvoidArrayLoops -->
+    <rule ref="category/java/performance.xml/AvoidArrayLoops"/>
+    <!-- UseArraysAsList-->
+    <rule ref="category/java/performance.xml/UseArraysAsList"/>
+
+    <!-- SECURITY-->
+    <!-- HardCodedCryptoKey-->
+    <rule ref="category/java/security.xml/HardCodedCryptoKey" />
+    <!-- InsecureCryptoIv-->
+    <rule ref="category/java/security.xml/InsecureCryptoIv" />
 
 </ruleset>
