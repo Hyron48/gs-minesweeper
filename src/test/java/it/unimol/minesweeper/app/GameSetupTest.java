@@ -12,7 +12,7 @@ public class GameSetupTest {
         assertEquals(Difficulty.EASY, easyMode.getDifficulty());
         assertEquals(8, easyMode.getWidth());
         assertEquals(8, easyMode.getHeight());
-        assertEquals(8, easyMode.getMinedPossibility());
+        assertEquals(25, easyMode.getMinedPossibility());
     }
 
     @Test
@@ -21,7 +21,7 @@ public class GameSetupTest {
         assertEquals(Difficulty.EASY, normalMode.getDifficulty()); // Attenzione: dovrebbe essere Difficulty.NORMAL
         assertEquals(15, normalMode.getWidth());
         assertEquals(15, normalMode.getHeight());
-        assertEquals(7, normalMode.getMinedPossibility());
+        assertEquals(15, normalMode.getMinedPossibility());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class GameSetupTest {
         assertEquals(Difficulty.EASY, hardMode.getDifficulty()); // Attenzione: dovrebbe essere Difficulty.HARD
         assertEquals(20, hardMode.getWidth());
         assertEquals(20, hardMode.getHeight());
-        assertEquals(5, hardMode.getMinedPossibility());
+        assertEquals(10, hardMode.getMinedPossibility());
     }
 
     @Test

@@ -1,7 +1,5 @@
 package it.unimol.minesweeper.app;
 
-import littlelib.Tools;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -59,7 +57,6 @@ public class Board {
     public int getHeight() {
         return height;
     }
-
 
 
     public boolean isDestroyed() {
@@ -130,7 +127,7 @@ public class Board {
 
     //Display Possible action
 
-    public void getUserInput(Scanner scanner) {
+    public boolean getUserInput(Scanner scanner) {
         System.out.println("Enter one of the following letters to perform an action:");
         System.out.println("m: Mark a box");
         System.out.println("u: Unmark a box");
@@ -139,26 +136,31 @@ public class Board {
 
         if (choice.equalsIgnoreCase("x")) {
             this.givenUp = true;
-            return;
+            return true;
         }
 
-        if (Tools.equalsOneOf(true, choice, "e", "m", "u")) {
-            int x= this.saveIntWithRange(scanner, "x: ", 0, this.width - 1);
-            int y = this.saveIntWithRange(scanner, "y: ", 0, this.height - 1);
-            switch (choice.toLowerCase()) {
-                case "e" :
-                    exploreBox(x, y);
-                    break;
-                case "m":
-                    mark(x, y);
-                    break;
-                case "u":
-                    unmark(x, y);
-                    break;
-                default:
-                    System.out.println("Invalid input. Enter x for exit.\n");
-                    break;
-                }
+        int x;
+        int y;
+
+        switch (choice.toLowerCase()) {
+            case "e":
+                x = this.saveIntWithRange(scanner, "x: ", 0, this.width - 1);
+                y = this.saveIntWithRange(scanner, "y: ", 0, this.height - 1);
+                exploreBox(x, y);
+                return true;
+            case "m":
+                x = this.saveIntWithRange(scanner, "x: ", 0, this.width - 1);
+                y = this.saveIntWithRange(scanner, "y: ", 0, this.height - 1);
+                mark(x, y);
+                return true;
+            case "u":
+                x = this.saveIntWithRange(scanner, "x: ", 0, this.width - 1);
+                y = this.saveIntWithRange(scanner, "y: ", 0, this.height - 1);
+                unmark(x, y);
+                return true;
+            default:
+                System.out.println("Invalid input. Enter x for exit.\n");
+                return false;
         }
     }
 
@@ -166,20 +168,12 @@ public class Board {
         System.out.println("\n\n");
         System.out.print("     ");
         for (int i = 0; i < width; i++) {
-            if (i < 10) {
-                System.out.print(i + "     ");
-            } else {
-                System.out.print(i + "     ");
-            }
+            System.out.print(i + "     ");
         }
         System.out.println("\n");
 
         for (int i = 0; i < height; i++) {
-            if (i < 10) {
-                System.out.print(i + "    ");
-            } else {
-                System.out.print(i + "   ");
-            }
+            System.out.print(i + "    ");
             for (int j = 0; j < width; j++) {
                 System.out.print(fields[i][j].getAppearance() + "     ");
             }
@@ -206,17 +200,17 @@ public class Board {
 
     private int[][] getNearbyBoxes(int x, int y) {
         int[][] nearbyBoxes = new int[][]{
-                { x - 1, y - 1 }, { x - 1, y }, { x - 1, y + 1 },
-                { x,     y - 1 },               { x    , y + 1 },
-                { x + 1, y - 1 }, { x + 1, y }, { x + 1, y + 1 }
+                {x - 1  , y - 1}, {x - 1 , y    }, {x - 1  , y + 1},
+                {x      , y - 1},                  {x      , y + 1},
+                {x + 1  , y - 1}, {x + 1 , y    }, {x + 1  , y + 1}
         };
 
         int numberOfValidCoords = 0;
-        int [] indices = new int[8];
+        int[] indices = new int[8];
         int indicesIndex = 0;
         for (int i = 0; i < 8; i++) {
             if ((nearbyBoxes[i][0] > -1 && nearbyBoxes[i][0] < this.height)
-                 && (nearbyBoxes[i][1] > -1 && nearbyBoxes[i][1] < this.width)) {
+                    && (nearbyBoxes[i][1] > -1 && nearbyBoxes[i][1] < this.width)) {
                 numberOfValidCoords++;
                 indices[indicesIndex] = i;
                 indicesIndex++;
@@ -232,7 +226,7 @@ public class Board {
     }
 
     private int saveIntWithRange(Scanner scanner, String label, int minValue, int maxValue) {
-        while(true) {
+        while (true) {
             int input = this.saveInt(label, scanner);
             if (input <= maxValue && input >= minValue) {
                 return input;

@@ -18,15 +18,15 @@ public class GameSetup {
     // Default Builder
 
     public static GameSetup getEasyMode() {
-        return new GameSetup(Difficulty.EASY, 8, 8, 8);
+        return new GameSetup(Difficulty.EASY, 8, 8, 25);
     }
 
     public static GameSetup getNormalMode() {
-        return new GameSetup(Difficulty.EASY, 15, 15, 7);
+        return new GameSetup(Difficulty.EASY, 15, 15, 15);
     }
 
     public static GameSetup getHardMode() {
-        return new GameSetup(Difficulty.EASY, 20, 20, 5);
+        return new GameSetup(Difficulty.EASY, 20, 20, 10);
     }
 
     public static GameSetup getCustomMode(int width, int height, int minedPossibility) {
