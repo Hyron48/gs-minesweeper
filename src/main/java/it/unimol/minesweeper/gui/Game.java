@@ -1,5 +1,6 @@
 package it.unimol.minesweeper.gui;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unimol.minesweeper.app.Board;
 import it.unimol.minesweeper.app.Difficulty;
 import it.unimol.minesweeper.app.GameSetup;
@@ -7,12 +8,7 @@ import littlelib.StopWatch;
 import littlelib.Tools;
 import littlelib.score.HighScoreList;
 
-import java.io.File;
-import java.io.ObjectInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -89,6 +85,8 @@ public class Game {
     }
 
     //Private Methods
+    @SuppressFBWarnings(value = "OBJECT_DESERIALIZATION",
+            justification = "Can't change ObjectInputStream and I need to deserialize the object")
     private void load() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SAVE_PATH))) {
             List<HighScoreList> scoreLists = (List<HighScoreList>) ois.readObject();

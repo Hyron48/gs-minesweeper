@@ -1,6 +1,6 @@
 package it.unimol.minesweeper.app;
 
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.Scanner;
 
 public class Board {
@@ -184,7 +184,7 @@ public class Board {
     // Private Methods
     private void setupMap(int minedPossibility) {
         this.fields = new Box[this.width][this.height];
-        Random rnd = new Random();
+        SecureRandom rnd = new SecureRandom();
 
         for (int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
