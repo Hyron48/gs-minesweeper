@@ -245,7 +245,7 @@ public class Board {
         while (true) {
             try {
                 System.out.print(label);
-                return Integer.valueOf(scanner.nextInt());
+                return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException var2) {
                 System.out.println("Not a valid number.");
             }
