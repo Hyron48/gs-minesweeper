@@ -58,7 +58,7 @@ public class BoardTest {
         // Simulate exploring all non-mined fields
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                if (!board.getFields()[i][j].isMined()) {
+                if (!board.getFieldsForTesting()[i][j].isMined()) {
                     board.exploreBox(i, j);
                 }
             }
@@ -67,12 +67,12 @@ public class BoardTest {
         assertTrue(board.isMapCompleted());
 
         board = new Board(5, 5, 5);
-        board.getFields()[1][1].explore();
+        board.getFieldsForTesting()[1][1].explore();
 
         // Simulate exploring all non-explored fields
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                if (board.getFields()[i][j].isExplored()) {
+                if (board.getFieldsForTesting()[i][j].isExplored()) {
                     board.exploreBox(i, j);
                 }
             }
@@ -84,7 +84,7 @@ public class BoardTest {
         // Simulate exploring all non-mined fields
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                if (!board.getFields()[i][j].isExplored() && !board.getFields()[i][j].isExplored()) {
+                if (!board.getFieldsForTesting()[i][j].isExplored() && !board.getFieldsForTesting()[i][j].isExplored()) {
                     board.exploreBox(i, j);
                 }
             }
@@ -98,7 +98,7 @@ public class BoardTest {
         Scanner scanner = new Scanner(new ByteArrayInputStream("e\n1\n1\n".getBytes()));
 
         Board board = new Board(5, 5, 5);
-        board.getFields()[1][1] = new Box(true);
+        board.getFieldsForTesting()[1][1] = new Box(true);
 
         assertFalse(board.isDestroyed());
         board.getUserInput(scanner);
@@ -108,17 +108,17 @@ public class BoardTest {
         scanner = new Scanner(new ByteArrayInputStream("m\n1\n1\n".getBytes()));
 
         board = new Board(5, 5, 5);
-        board.getFields()[1][1] = new Box(true);
+        board.getFieldsForTesting()[1][1] = new Box(true);
 
-        assertEquals(board.getFields()[1][1].getAppearance(), "-");
+        assertEquals(board.getFieldsForTesting()[1][1].getAppearance(), "-");
         board.getUserInput(scanner);
-        assertEquals(board.getFields()[1][1].getAppearance(), "#");
+        assertEquals(board.getFieldsForTesting()[1][1].getAppearance(), "#");
 
         // Unmark
         scanner = new Scanner(new ByteArrayInputStream("u\n1\n1\n".getBytes()));
-        assertEquals(board.getFields()[1][1].getAppearance(), "#");
+        assertEquals(board.getFieldsForTesting()[1][1].getAppearance(), "#");
         board.getUserInput(scanner);
-        assertEquals(board.getFields()[1][1].getAppearance(), "-");
+        assertEquals(board.getFieldsForTesting()[1][1].getAppearance(), "-");
 
         // Give Up
         scanner = new Scanner(new ByteArrayInputStream("x\n".getBytes()));
@@ -149,26 +149,26 @@ public class BoardTest {
         Board board = new Board(5, 5, 5);
         for (int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                board.getFields()[i][j] = new Box(false);
+                board.getFieldsForTesting()[i][j] = new Box(false);
             }
         }
 
         board.getUserInput(scanner);
 
-        assertEquals(" ", board.getFields()[1][1].getAppearance());
+        assertEquals(" ", board.getFieldsForTesting()[1][1].getAppearance());
     }
 
     @Test
     public void testMarkUnmark() {
         Board board = new Board(3, 3, 9);
-        board.getFields()[1][1] = new Box(true);
+        board.getFieldsForTesting()[1][1] = new Box(true);
 
-        assertFalse(board.getFields()[0][0].isMarked());
+        assertFalse(board.getFieldsForTesting()[0][0].isMarked());
         board.mark(0, 0);
-        assertTrue(board.getFields()[0][0].isMarked());
+        assertTrue(board.getFieldsForTesting()[0][0].isMarked());
 
         board.unmark(0, 0);
-        assertFalse(board.getFields()[0][0].isMarked());
+        assertFalse(board.getFieldsForTesting()[0][0].isMarked());
     }
 
     @Test
@@ -178,7 +178,7 @@ public class BoardTest {
         Scanner scanner = new Scanner(System.in);
 
         Board board = new Board(5, 5, 9);
-        board.getFields()[1][1] = new Box(true);
+        board.getFieldsForTesting()[1][1] = new Box(true);
 
         assertFalse(board.isDestroyed());
         board.getUserInput(scanner);

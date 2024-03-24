@@ -1,12 +1,14 @@
 package it.unimol.minesweeper.app;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.security.SecureRandom;
 import java.util.Scanner;
 
 public class Board {
-    public static int min = 5;
-    public static int max = 99;
-    public static int minimumMined = 2;
+    public static final int min = 5;
+    public static final int max = 99;
+    public static final int minimumMined = 2;
 
     private int width;
     private int height;
@@ -76,10 +78,11 @@ public class Board {
         System.out.println("Y: Column number\n");
     }
 
-    public Box[][] getFields() {
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP",
+            justification = "This method is intended for testing purposes only")
+    public Box[][] getFieldsForTesting() {
         return fields;
     }
-
     // User Action
     public void mark(int x, int y) {
         this.fields[x][y].mark();
@@ -182,6 +185,8 @@ public class Board {
     }
 
     // Private Methods
+    @SuppressFBWarnings(value = "DMI_RANDOM_USED_ONLY_ONCE",
+            justification = "I have to call rnd.nextInt every time in the for loop")
     private void setupMap(int minedPossibility) {
         this.fields = new Box[this.width][this.height];
         SecureRandom rnd = new SecureRandom();
@@ -240,7 +245,7 @@ public class Board {
         while (true) {
             try {
                 System.out.print(label);
-                return Integer.valueOf(scanner.nextLine());
+                return Integer.valueOf(scanner.nextInt());
             } catch (NumberFormatException var2) {
                 System.out.println("Not a valid number.");
             }

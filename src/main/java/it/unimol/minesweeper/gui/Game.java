@@ -9,36 +9,47 @@ import it.unimol.minesweeper.app.utils.StopWatch;
 import it.unimol.minesweeper.app.utils.Tools;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Game {
     private static final String SAVE_PATH = "Minesweeper.data";
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
 
     private HighScoreList easyHighScoreList;
     private HighScoreList normalHighScoreList;
     private HighScoreList hardHighScoreList;
 
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP",
+            justification = "This method is intended for testing purposes only")
     public HighScoreList getEasyHighScoreList() {
         return easyHighScoreList;
     }
 
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP",
+            justification = "This method is intended for testing purposes only")
     public HighScoreList getNormalHighScoreList() {
         return normalHighScoreList;
     }
 
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP",
+            justification = "This method is intended for testing purposes only")
     public HighScoreList getHardHighScoreList() {
         return hardHighScoreList;
     }
 
     public Game() {
-        File save = new File(SAVE_PATH);
-        if (save.exists()) {
-            load();
-        } else {
-            this.setManuallyHighScore();
+        try {
+            File save = new File(SAVE_PATH);
+            if (save.exists()) {
+                load();
+            } else {
+                this.setManuallyHighScore();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
