@@ -1,2 +1,7 @@
 <FindBugsFilter>
+    <Match>
+        <Class name="it.unimol.minesweeper.app.Board" />
+        <Bug code="EI_EXPOSE_REP" />
+        <Method name="getFieldsForTesting" />
+    </Match>
 </FindBugsFilter>
