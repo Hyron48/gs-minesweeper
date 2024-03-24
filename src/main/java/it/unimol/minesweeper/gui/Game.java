@@ -4,9 +4,9 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unimol.minesweeper.app.Board;
 import it.unimol.minesweeper.app.Difficulty;
 import it.unimol.minesweeper.app.GameSetup;
-import littlelib.StopWatch;
-import littlelib.Tools;
-import littlelib.score.HighScoreList;
+import it.unimol.minesweeper.app.utils.HighScoreList;
+import it.unimol.minesweeper.app.utils.StopWatch;
+import it.unimol.minesweeper.app.utils.Tools;
 
 import java.io.*;
 import java.util.ArrayList;
