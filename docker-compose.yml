@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  project:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: minesweeper
+    restart: unless-stopped
