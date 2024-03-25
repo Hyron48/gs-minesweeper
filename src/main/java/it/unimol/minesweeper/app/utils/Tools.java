@@ -22,7 +22,7 @@ public class Tools {
         while (true) {
             try {
                 System.out.print(prompt);
-                return Integer.valueOf(scanner.nextInt());
+                return Integer.parseInt(scanner.nextLine());
 
             } catch (NumberFormatException e) {
                 System.out.println("Not a valid number.");
